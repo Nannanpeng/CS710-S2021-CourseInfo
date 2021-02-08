@@ -1,0 +1,54 @@
+---
+title: "Two Plots about NBA Forecasting"
+author: "Nannan Peng"
+date: "2/7/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+\textbf{Note:} Feel free to use the plots in class and attach my name. \par
+The two plots check the efficacy of the forecasting chances of winning. The first plot is the relationship between the average forecasting chance and the winning percentage across teams. The second plot is the relationship between the average forecasting chance and the average point differential across teams.
+
+```{r, message=FALSE}
+# load libraries
+library(ggplot2)
+library(egg)
+library(gridExtra)
+
+# read the data
+d <- read.csv("nbaallelo.csv")
+
+# create a dummy of win/lose and point differential 
+d$game_result_trans <- ifelse(d$game_result=='W', 1, 0)
+d$point_differential <- d$pts - d$opp_pts
+
+# calculate mean by group_ids.
+dmean <- aggregate(d[,c("forecast", "game_result_trans", "point_differential")],
+                   list(d$team_id), mean)
+```
+
+
+```{r pressure,  fig.height = 6}
+
+p1 <- ggplot(dmean, aes(x=forecast, y=game_result_trans)) +
+        geom_point() +
+        geom_smooth(method=lm, formula=y~x, se=FALSE) +
+        scale_size_area() +
+        xlab("Mean forecasting chance") +
+        ylab("Winning percentage") +
+        ggtitle("Figure 1. Mean forecasting chance vs. winning percentage") +
+        theme(plot.title = element_text(hjust = 0.5))
+
+p2 <- ggplot(dmean, aes(x=forecast, y=point_differential)) +
+        geom_point(shape=21, fill="red") +
+        geom_smooth(method=lm,formula=y~x, se=FALSE, color="black") +
+        scale_size_area() +
+        xlab("Mean forecasting chance") +
+        ylab("Mean point differential") +
+        ggtitle("Figure 2. Mean forecasting chance vs. mean point differential") +
+        theme(plot.title = element_text(hjust = 0.5))
+ggarrange(p1, p2, nrow=2, ncol=1)
+```
