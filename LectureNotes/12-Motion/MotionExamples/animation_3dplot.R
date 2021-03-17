@@ -65,7 +65,10 @@ point2dplot<-function(gpcdata,speciesdata,parameter,colors){
 }
 
 #### Loading Data ####
+<<<<<<< HEAD
 #parameters<-read.csv("birdwing_panelwingGPC_681_data.csv",header=TRUE) 
+=======
+>>>>>>> upstream/main
 parameters<-read.csv("birdwing_flatwingGPC_681_data.csv",header=TRUE) 
 
 #### 3D Scatterplot Anim ####
@@ -81,7 +84,10 @@ for (i in seq(0,180,by=1)){
   dev.off()
 }
 
+<<<<<<< HEAD
 #setwd("~/Dropbox (Chapman)/wing_gPC/birdwingGPC/paper/figures/gpcwingmodel")
+=======
+>>>>>>> upstream/main
 png(filename="CLCD_gPC_raw.png",width=w,height=h,unit="in",res=300)
 gpc3d.object<-gpc3d2(parameters,"Re","Camber","AR","slope",i,0.85,0.2,NA)
 dev.off()
