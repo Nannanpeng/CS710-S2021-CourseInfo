@@ -43,3 +43,10 @@ basemap + scale_fill_continuous_sequential(palette="Peach")
 
 # Color map diverging from the midpoint (mean murder rate) with colorspace 
 basemap + scale_fill_continuous_diverging(palette="Blue-Red",mid=mean(crime_map$Murder))
+
+
+# vary by hue
+basemap + scale_fill_continuous_sequential(palette="Viridis")
+
+# vary by hue
+basemap + scale_fill_continuous_sequential(palette="Blues 3")

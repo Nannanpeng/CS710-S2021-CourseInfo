@@ -20,8 +20,8 @@ myColorRamp <- function(colors, values, minmax) {
 # e.g. "Camber" or "Caoa" as character strings. To add to plot, call
 # this function as gpc3d.object<-gpc3d(...)
 
-gpc3d2<-function(data,parameter1,parameter2,parameter3,value,alpha,xadj,yadj,colors){
-  par1<-data[,which(names(data)==parameter1)]/1000
+gpc3d2 <- function(data,parameter1,parameter2,parameter3,value,alpha,xadj,yadj,colors){
+  par1<-data[,which(names(data)==parameter1)] # /1000
   par2<-data[,which(names(data)==parameter2)]
   par3<-data[,which(names(data)==parameter3)]
   val<-data[,which(names(data)==value)]
@@ -30,13 +30,14 @@ gpc3d2<-function(data,parameter1,parameter2,parameter3,value,alpha,xadj,yadj,col
   } else {
       cols <- myColorRamp(colors, val, range(val))
   }  
-  gpc3d.object<-scatterplot3d(par1,par2,par3,
+  gpc3d.object<-scatterplot3d(par1, par2, par3,
                               pch=16,color=cols,
-                              xlab="Re (x1000)",
+                              xlab=parameter1,
                               ylab=" ",
                               #ylab=parameter2,
                               zlab=parameter3,
-                              angle=alpha,y.margin.add=1)
+                              angle=alpha, 
+                              y.margin.add=1)
   dims <- par("usr")
   x <- dims[1]+ xadj*diff(dims[1:2])
   y <- dims[3]+ yadj*diff(dims[3:4])
@@ -45,7 +46,7 @@ gpc3d2<-function(data,parameter1,parameter2,parameter3,value,alpha,xadj,yadj,col
   return(gpc3d.object)
 }
 
-point2dplot<-function(gpcdata,speciesdata,parameter,colors){
+point2dplot <- function(gpcdata,speciesdata,parameter,colors){
   gpcpar<-gpcdata[,which(names(gpcdata)==parameter)]
   speciespar<-speciesdata[,which(names(speciesdata)==parameter)]
   combined<-c(gpcpar,speciespar)
@@ -65,10 +66,9 @@ point2dplot<-function(gpcdata,speciesdata,parameter,colors){
 }
 
 #### Loading Data ####
-<<<<<<< HEAD
+
 #parameters<-read.csv("birdwing_panelwingGPC_681_data.csv",header=TRUE) 
-=======
->>>>>>> upstream/main
+
 parameters<-read.csv("birdwing_flatwingGPC_681_data.csv",header=TRUE) 
 
 #### 3D Scatterplot Anim ####
@@ -78,16 +78,30 @@ h=5
 # CLCD
 i=75
 for (i in seq(0,180,by=1)){
-  png(filename=paste("pngs/",i,".png",sep=""),width=w,height=h,unit="in",res=200)
+  png(filename=paste("pngs/",i,".png",sep=""), width=w, height=h, unit="in", res=200)
   gpc3d.object<-gpc3d2(parameters,"Camber","AR","Re","CLCD",i,0.85,0.2,c("steelblue","white"))
   gpc3d.object
   dev.off()
 }
 
-<<<<<<< HEAD
+
+
+happyData<-data.frame(read.csv("2019.csv",header=TRUE)) 
+
+w=5.25
+h=5
+# CLCD
+i=75
+for (i in seq(0,360,by=1)){
+  png(filename=paste("happinessPngs/",i,".png",sep=""), width=w, height=h, unit="in", res=200)
+  gpc3d.object<-gpc3d2(happyData,"GDP.per.capita","Social.support","Healthy.life.expectancy","Score",i,0.85,0.2,c("white", "steelblue"))
+  gpc3d.object
+  dev.off()
+}
+
+
 #setwd("~/Dropbox (Chapman)/wing_gPC/birdwingGPC/paper/figures/gpcwingmodel")
-=======
->>>>>>> upstream/main
+
 png(filename="CLCD_gPC_raw.png",width=w,height=h,unit="in",res=300)
 gpc3d.object<-gpc3d2(parameters,"Re","Camber","AR","slope",i,0.85,0.2,NA)
 dev.off()
