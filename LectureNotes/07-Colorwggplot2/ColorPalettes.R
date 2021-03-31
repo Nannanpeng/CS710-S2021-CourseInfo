@@ -51,6 +51,7 @@ pal(tritan(diverging_hcl(7)))  #tritan() tritanomaly, blue-yellow (missing/defec
 hcl_palettes(plot = TRUE)
 
 # Use colorspace palettes with ggplot2
+library(ggplot2)
 ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.6) +
   scale_fill_discrete_qualitative(palette = "Dynamic")
 
