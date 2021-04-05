@@ -67,9 +67,12 @@ point2dplot <- function(gpcdata,speciesdata,parameter,colors){
 
 #### Loading Data ####
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #parameters<-read.csv("birdwing_panelwingGPC_681_data.csv",header=TRUE) 
 
+=======
+>>>>>>> upstream/main
 =======
 >>>>>>> upstream/main
 parameters<-read.csv("birdwing_flatwingGPC_681_data.csv",header=TRUE) 
@@ -87,6 +90,7 @@ for (i in seq(0,180,by=1)){
   dev.off()
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -106,6 +110,8 @@ for (i in seq(0,360,by=1)){
 
 #setwd("~/Dropbox (Chapman)/wing_gPC/birdwingGPC/paper/figures/gpcwingmodel")
 
+=======
+>>>>>>> upstream/main
 =======
 >>>>>>> upstream/main
 png(filename="CLCD_gPC_raw.png",width=w,height=h,unit="in",res=300)
